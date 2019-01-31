@@ -1,12 +1,11 @@
 package org.konate.telecom3.tutographql;
 
-import com.coxautodev.graphql.tools.GraphQLResolver;
+import com.coxautodev.graphql.tools.GraphQLRootResolver;
 
-public class Mutation implements GraphQLResolver<Link> {
+public class Mutation implements GraphQLRootResolver {
 	private final LinkRepository linkRepository;
 
 	public Mutation(LinkRepository linkRepository) {
-		super();
 		this.linkRepository = linkRepository;
 	}
 	
