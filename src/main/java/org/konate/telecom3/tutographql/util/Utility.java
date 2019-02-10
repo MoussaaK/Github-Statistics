@@ -26,7 +26,7 @@ public class Utility {
 		client= HttpClients.createDefault();
 		HttpPost httpPost= new HttpPost("https://api.github.com/graphql");
 		
-		String token = Utility.getToken("./files/token.txt").toString();
+		String token = Utility.getToken("./token.txt").toString();
 		httpPost.addHeader("Authorization", token);
 		httpPost.addHeader("Accept", "application/json");
 
