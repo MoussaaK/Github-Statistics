@@ -2,6 +2,10 @@ package org.konate.telecom3.tutographql;
 
 import javax.servlet.annotation.WebServlet;
 
+import org.konate.telecom3.tutographql.util.LinkRepository;
+import org.konate.telecom3.tutographql.util.Mutation;
+import org.konate.telecom3.tutographql.util.Query;
+
 import com.coxautodev.graphql.tools.SchemaParser;
 
 import graphql.schema.GraphQLSchema;

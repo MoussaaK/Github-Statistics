@@ -1,4 +1,6 @@
-package org.konate.telecom3.tutographql;
+package org.konate.telecom3.tutographql.util;
+
+import org.konate.telecom3.tutographql.model.Link;
 
 import com.coxautodev.graphql.tools.GraphQLRootResolver;
 
