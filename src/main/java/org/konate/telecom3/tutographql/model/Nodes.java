@@ -1,4 +1,4 @@
-package org.konate.telecom3.tutographql;
+package org.konate.telecom3.tutographql.model;
 
 import java.util.List;
 
