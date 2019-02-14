@@ -108,3 +108,31 @@
   }
 }
 
+##Get all users first 10 repo.'s main langage
+
+{
+  search(query: "type:user", first: 100, type: USER) {
+    userCount
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+    edges {
+      node {
+        ... on User {
+          login
+          repositories(first: 10){
+            nodes{
+              name
+              primaryLanguage {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
