@@ -34,8 +34,11 @@ public class Utility {
 		httpPost.addHeader("Accept", "application/json");
 
 		JSONObject GraphQLQuery = new JSONObject(); 
+		/*GraphQLQuery.put("query",
+						 "{user(login: \"donbeave\") { name repositories(last: 10) { nodes { url, description}}}}");*/
+		
 		GraphQLQuery.put("query",
-						 "{user(login: \"donbeave\") { name repositories(last: 10) { nodes { url, description}}}}");
+				 "{ search(query: \"type:user\", first: 100, type: USER) { userCount pageInfo { endCursor hasNextPage } edges { node { ... on User { login } } } } }");
 
 		StringEntity entity = null;
 		StringBuilder builder = new StringBuilder();

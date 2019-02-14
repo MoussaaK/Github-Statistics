@@ -2,9 +2,13 @@ type Link {
   url: String!
   description: String!
 }
+type User {
+  login: String!
+}
 
 type Query {
   allLinks: [Link]
+  allUsers: [User]
 }
 
 type Mutation {
