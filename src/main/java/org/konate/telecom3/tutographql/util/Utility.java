@@ -19,23 +19,26 @@ import org.json.JSONObject;
 
 public class Utility {
 	
+	
+	//Using http and the github api to fetch data using 
+	//Graphql langage. Saving it in a JSON object 
 	public static StringBuilder getData() {
     	CloseableHttpClient client= null;
 		CloseableHttpResponse response= null;
 
 		client= HttpClients.createDefault();
 		HttpPost httpPost= new HttpPost("https://api.github.com/graphql");
-		
+		//Token read from a file for security constraints
 		String token = Utility.getToken("./token.txt").toString();
 		httpPost.addHeader("Authorization", token);
 		httpPost.addHeader("Accept", "application/json");
 
 		JSONObject GraphQLQuery = new JSONObject(); 
 		GraphQLQuery.put("query",
-						 "query {user(login: \"MoussaaK\") { name repositories(last: 10) { nodes { url description}}}}");
+						 "{user(login: \"donbeave\") { name repositories(last: 10) { nodes { url, description}}}}");
 
 		StringEntity entity = null;
-		StringBuilder builder= new StringBuilder();
+		StringBuilder builder = new StringBuilder();
 		try {
 			entity = new StringEntity(GraphQLQuery.toString());
 		} catch (UnsupportedEncodingException e) {
