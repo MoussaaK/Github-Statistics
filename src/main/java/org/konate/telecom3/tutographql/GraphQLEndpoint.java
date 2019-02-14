@@ -11,6 +11,7 @@ import com.coxautodev.graphql.tools.SchemaParser;
 import graphql.schema.GraphQLSchema;
 import graphql.servlet.SimpleGraphQLServlet;
 
+//The main and only endpoint of the application
 @WebServlet(urlPatterns = "/graphql")
 public class GraphQLEndpoint extends SimpleGraphQLServlet {
 
@@ -19,7 +20,7 @@ public class GraphQLEndpoint extends SimpleGraphQLServlet {
 	public GraphQLEndpoint() {
         super(buildSchema());
     }
-
+//Builder using schema definition file and the requests models
     private static GraphQLSchema buildSchema() {
         LinkRepository linkRepository = new LinkRepository();
         return SchemaParser.newParser()
@@ -28,6 +29,7 @@ public class GraphQLEndpoint extends SimpleGraphQLServlet {
                 		   new Mutation(linkRepository))
                 .build()
                 .makeExecutableSchema();
-    }
+    }    
+    
 }
 
