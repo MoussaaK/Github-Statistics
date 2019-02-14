@@ -90,5 +90,21 @@
   }
 }
 
-
+## Get Github users login
+{
+  search(query: "type:user", first: 100, type: USER) {
+    userCount
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+    edges {
+      node {
+        ... on User {
+          login
+        }
+      }
+    }
+  }
+}
 
