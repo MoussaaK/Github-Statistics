@@ -108,7 +108,7 @@
   }
 }
 
-##Get all users first 10 repo.'s main langage
+## Get all users first 10 repo.'s main langage
 
 {
   search(query: "type:user", first: 100, type: USER) {
