@@ -32,7 +32,7 @@ public class Utility {
 
 		JSONObject GraphQLQuery = new JSONObject(); 
 		GraphQLQuery.put("query",
-						 "query {user(login: \"MoussaaK\") { name repositories(last: 10) { nodes { url description}}}}");
+						 "{user(login: \"MoussaaK\") { name repositories(last:10) { nodes { url description}}}}");
 
 		StringEntity entity = null;
 		StringBuilder builder= new StringBuilder();
@@ -45,7 +45,6 @@ public class Utility {
 		try {
 			response = client.execute(httpPost);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
