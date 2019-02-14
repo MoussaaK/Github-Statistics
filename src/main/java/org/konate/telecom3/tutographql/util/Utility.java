@@ -75,18 +75,3 @@ public class Utility {
 		return null;
 	} 
 }
-			return lines.collect(Collectors.joining(""));
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-		return null;
-	} 
-}
-try (Stream<String> lines = Files.lines(path)) {
-			return lines.collect(Collectors.joining(""));
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
-		return null;
-	} 
-}
