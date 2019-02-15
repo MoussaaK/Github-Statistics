@@ -4,6 +4,7 @@ type Link {
 }
 type User {
   login: String!
+  name: String
 }
 
 type Query {
