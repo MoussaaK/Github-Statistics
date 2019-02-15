@@ -19,26 +19,24 @@ import org.json.JSONObject;
 
 public class Utility {
 	
+	private static CloseableHttpClient client = null;
+	private static CloseableHttpResponse response = null;
 	
+	//Token read from a file for security constraints
+	private static String token = getToken("./token.txt").toString();
+	private static JSONObject GraphQLQuery = null; 
+
 	//Using http and the github api to fetch data using 
 	//Graphql langage. Saving it in a JSON object 
-	public static StringBuilder getData() {
-    	CloseableHttpClient client= null;
-		CloseableHttpResponse response= null;
-
-		client= HttpClients.createDefault();
-		HttpPost httpPost= new HttpPost("https://api.github.com/graphql");
-		//Token read from a file for security constraints
-		String token = Utility.getToken("./token.txt").toString();
+	public static StringBuilder getQueryResponse(String queryString) {
+		client = HttpClients.createDefault();
+		HttpPost httpPost = new HttpPost("https://api.github.com/graphql");
 		httpPost.addHeader("Authorization", token);
 		httpPost.addHeader("Accept", "application/json");
-
-		JSONObject GraphQLQuery = new JSONObject(); 
-		/*GraphQLQuery.put("query",
-						 "{user(login: \"donbeave\") { name repositories(last: 10) { nodes { url, description}}}}");*/
 		
-		GraphQLQuery.put("query",
-				 "{ search(query: \"type:user\", first: 100, type: USER) { userCount pageInfo { endCursor hasNextPage } edges { node { ... on User { login } } } } }");
+		GraphQLQuery = new JSONObject();
+		
+		GraphQLQuery.put("query", queryString);
 
 		StringEntity entity = null;
 		StringBuilder builder = new StringBuilder();
@@ -51,20 +49,20 @@ public class Utility {
 		try {
 			response = client.execute(httpPost);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
 		try {
 			BufferedReader reader= new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-			String line= null;
+			String line = null;
 			
-			while((line=reader.readLine())!= null){
+			while((line = reader.readLine()) != null){
 				builder.append(line);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return builder;
     }
 	
