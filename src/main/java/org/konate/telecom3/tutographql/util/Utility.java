@@ -54,8 +54,10 @@ public class Utility {
 			e1.printStackTrace();
 		}
 
-		try {
-			BufferedReader reader= new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+		try (BufferedReader reader =
+				new BufferedReader(new InputStreamReader(response.getEntity()
+						.getContent()));){
+			
 			String line = null;
 
 			while((line = reader.readLine()) != null){
@@ -99,7 +101,7 @@ public class Utility {
 		List<JSONArray> jsonArrays = new ArrayList<>();
 		List<User> moreUsers = new ArrayList<>();
 		String queryString;
-		
+
 		while (hasNextPage) {
 			queryString = "{ search(query: \"type:user\", first: 100, after:\"" + endCursor + "\", type: USER) { userCount pageInfo { endCursor hasNextPage } edges { node { ... on User { login name } } } } }";
 			JSONObject newResponseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
@@ -121,7 +123,7 @@ public class Utility {
 			jsonArrays.add(array);
 		}
 		//System.out.println("jsonArrays ->" + jsonArrays);
-		
+
 		for (JSONArray jsonArray : jsonArrays) {
 			for (int i = 0; i < jsonArray.length(); i++) {
 				moreUsers.add(new User(jsonArray.getJSONObject(i).getJSONObject("node").getString("login"),
