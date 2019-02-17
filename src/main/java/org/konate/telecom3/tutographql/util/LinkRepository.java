@@ -19,7 +19,7 @@ public class LinkRepository {
 	}
 
 	public List<Link> getAllLinks() {
-		String queryString = "{user(login: \\\"MoussaaK\\\") { name repositories(last: 10) { nodes { url, description}}}}";
+		String queryString = "{user(login: \"MoussaaK\") { name repositories(last: 100) { nodes { url, description}}}}";
 		JSONObject responseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
 		JSONArray jsonArray = responseFromGithub.getJSONObject("data")
 				.getJSONObject("user")
@@ -40,46 +40,14 @@ public class LinkRepository {
 		JSONArray jsonArray = responseFromGithub.getJSONObject("data")
 				.getJSONObject("search")
 				.getJSONArray("edges");
-		
-//		boolean hasNextPage = responseFromGithub.getJSONObject("data")
-//				.getJSONObject("search")
-//				.getJSONObject("pageInfo")
-//				.getBoolean("hasNextPage");
-//		
-//		String endCursor = responseFromGithub.getJSONObject("data")
-//				.getJSONObject("search")
-//				.getJSONObject("pageInfo")
-//				.getString("endCursor");
-
+	
 		for (int i = 0; i < jsonArray.length(); i++) {
 			saveUser(new User(jsonArray.getJSONObject(i).getJSONObject("node").getString("login"),
 					jsonArray.getJSONObject(i).getJSONObject("node").getString("name")));
 		}
 		
 		/*REQUETEE POUR UPDATE LE CURSOR*/
-	
-//		while (hasNextPage) {
-//			queryString = "{ search(query: \"type:user\", first: 100, after:" + endCursor + ", type: USER) { userCount pageInfo { endCursor hasNextPage } edges { node { ... on User { login name } } } } }";
-//			JSONObject newResponseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
-//			JSONArray array = newResponseFromGithub.getJSONObject("data")
-//					.getJSONObject("search")
-//					.getJSONArray("edges");
-//
-//			for (int i = 0; i < array.length(); i++) {
-//				saveUser(new User(array.getJSONObject(i).getJSONObject("node").getString("login"),
-//						array.getJSONObject(i).getJSONObject("node").getString("name")));
-//			}
-//			
-//			endCursor = newResponseFromGithub.getJSONObject("data")
-//					.getJSONObject("search")
-//					.getJSONObject("pageInfo")
-//					.getString("endCursor");
-//			
-//			hasNextPage = newResponseFromGithub.getJSONObject("data")
-//					.getJSONObject("search")
-//					.getJSONObject("pageInfo")
-//					.getBoolean("hasNextPage");
-//		}
+		
 
 		return users;
 	}
