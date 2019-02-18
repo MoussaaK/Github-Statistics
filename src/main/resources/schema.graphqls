@@ -2,9 +2,25 @@ type Link {
   url: String!
   description: String!
 }
+
+type Node {
+  name: String
+  description: String
+}
+
+type Nodes {
+  nodes: [Node]
+}
+
+type Repository {
+  node: Nodes
+  totalCount: Int
+}
+
 type User {
   login: String!
   name: String
+  repositories: Repository
 }
 
 type Query {
