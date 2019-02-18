@@ -1,25 +1,3 @@
-## Get commit count
-{
-  repository(owner: "MoussaaK", name: "learngraphql") {
-    object(expression:"master") {
-      ... on Commit {
-        history {
-          totalCount
-        }
-      }
-    }
-    languages(last:5) {
-      totalCount
-      nodes {
-        name
-        color
-        id
-      }
-    }
-  }
-}
-
-
 ## Get commit details
 {
   repository(owner: "MoussaaK", name: "learngraphql") {
@@ -52,7 +30,7 @@
 
 
 
-## Search java repos
+## Search JAVA REPOS and COMMITS
 {
   rateLimit {
     cost
@@ -60,7 +38,14 @@
     remaining
     resetAt
   }
-  search(query: "java", type: REPOSITORY, first: 10) {
+  {
+  rateLimit {
+    cost
+    limit
+    remaining
+    resetAt
+  }
+  search(query: "language:java", type: REPOSITORY, last: 100) {
     repositoryCount
     pageInfo {
       endCursor
@@ -71,7 +56,7 @@
       node {
         ... on Repository {
           nameWithOwner
-          primaryLanguage{
+          primaryLanguage {
             name
           }
           pushedAt
@@ -90,7 +75,7 @@
   }
 }
 
-## Get Github users login
+## Get first 100 Users with FOLLOWERS
 {
   search(query: "type:user", first: 100, type: USER) {
     userCount
@@ -102,37 +87,144 @@
       node {
         ... on User {
           login
-        }
-      }
-    }
-  }
-}
-
-## Get all users first 10 repo.'s main langage
-
-{
-  search(query: "type:user", first: 100, type: USER) {
-    userCount
-    pageInfo {
-      endCursor
-      hasNextPage
-    }
-    edges {
-      node {
-        ... on User {
-          login
-          repositories(first: 10){
-            nodes{
-              name
-              primaryLanguage {
-                name
-              }
-            }
+          name
+          createdAt
+          followers {
+            totalCount
           }
         }
       }
     }
   }
 }
+
+## List all Repos and their main LANGUAGE
+{
+  search(query: "is:public", first: 100, type: REPOSITORY) {
+    repositoryCount
+    pageInfo {
+      endCursor
+      startCursor
+      hasNextPage
+    }
+    edges {
+      node {
+        ... on Repository {
+          nameWithOwner
+          name
+          primaryLanguage {
+            name
+          }
+          pushedAt
+        }
+      }
+    }
+  }
+}
+
+## Issues Per First 100 Users
+{
+  search(query: "is:public", first: 100, type: ISSUE) {
+    repositoryCount
+    pageInfo {
+      endCursor
+      startCursor
+      hasNextPage
+    }
+    edges {
+      node {
+        ... on Issue {
+          createdAt
+          title
+          url,
+          repository {
+            name
+          }
+        }
+      }
+    }
+  }
+}
+
+## Number of repos per user
+{
+  search(query: "type:user", first: 100, type: USER) {
+    userCount
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+    edges {
+      node {
+        ... on User {
+          login
+          name
+          createdAt
+          repositories {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+}
+
+
+## Forks, Stars and PR per Java repositories
+{
+  rateLimit {
+    cost
+    limit
+    remaining
+    resetAt
+  }
+  search(query: "language:java stars:>10000", type: REPOSITORY, first: 100) {
+    repositoryCount
+    pageInfo {
+      endCursor
+      startCursor
+      hasNextPage
+    }
+    edges {
+      node {
+        ... on Repository {
+          nameWithOwner
+          forks {
+            totalCount
+          }
+          pullRequests {
+            totalCount
+          }
+          stargazers {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+}
+
+
+## Orgnization
+{
+  repositoryOwner(login: "google") {
+    ... on User {
+      avatarUrl
+      bio
+    }
+    ... on Organization {
+      name
+      members {
+        totalCount
+      }
+      repositories {
+        totalCount
+      }
+    }
+  }
+}
+
+
+
 
 
