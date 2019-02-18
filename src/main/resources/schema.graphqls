@@ -7,9 +7,16 @@ type User {
   name: String
 }
 
+type Company{
+  companyName: String!
+  numberOfMembers: Int
+  numberOfRepositories: Int
+}
+
 type Query {
   allLinks: [Link]
   allUsers: [User]
+  getCompanyData: [Company]
 }
 
 type Mutation {

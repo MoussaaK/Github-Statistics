@@ -57,7 +57,7 @@ public class Utility {
 		try (BufferedReader reader =
 				new BufferedReader(new InputStreamReader(response.getEntity()
 						.getContent()));){
-			
+
 			String line = null;
 
 			while((line = reader.readLine()) != null){
@@ -106,6 +106,7 @@ public class Utility {
 			queryString = "{ search(query: \"type:user\", first: 100, after:\"" + endCursor + "\", type: USER) { userCount pageInfo { endCursor hasNextPage } edges { node { ... on User { login name } } } } }";
 			JSONObject newResponseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
 
+			//Mises à jour nécessaires pour la navigation
 			hasNextPage = newResponseFromGithub.getJSONObject("data")
 					.getJSONObject("search")
 					.getJSONObject("pageInfo")
@@ -122,7 +123,7 @@ public class Utility {
 			//System.out.println("array -> " + array);
 			jsonArrays.add(array);
 		}
-		//System.out.println("jsonArrays ->" + jsonArrays);
+	    //System.out.println("jsonArrays ->" + jsonArrays);
 
 		for (JSONArray jsonArray : jsonArrays) {
 			for (int i = 0; i < jsonArray.length(); i++) {

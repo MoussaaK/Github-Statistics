@@ -2,6 +2,7 @@ package org.konate.telecom3.tutographql.util;
 
 import java.util.List;
 
+import org.konate.telecom3.tutographql.model.Company;
 import org.konate.telecom3.tutographql.model.Link;
 import org.konate.telecom3.tutographql.model.User;
 
@@ -21,5 +22,9 @@ public class Query implements GraphQLRootResolver {
     
     public List<User> allUsers() {
         return linkRepository.getAllUsers();
+    }
+    
+    public List<Company> getCompanyData() {
+        return linkRepository.getCompanyData();
     }
 }
