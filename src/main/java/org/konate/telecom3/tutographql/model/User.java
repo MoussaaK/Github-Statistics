@@ -1,9 +1,9 @@
 package org.konate.telecom3.tutographql.model;
 
 public class User {
+	private String login;
 	private String name;
 	private Repository repositories;
-	private String login;
 
 	public User() {
 		super();
@@ -16,6 +16,13 @@ public class User {
 	public User(String login, String name) {
 		this.login = login;
 		this.name = name;
+	}
+	
+	public User(String login, String name, Repository repositories) {
+		super();
+		this.login = login;
+		this.name = name;
+		this.repositories = repositories;
 	}
 
 	public void setName(String name) {
