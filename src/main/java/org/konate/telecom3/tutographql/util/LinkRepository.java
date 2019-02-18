@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.konate.telecom3.tutographql.model.Link;
+import org.konate.telecom3.tutographql.model.Repository;
 import org.konate.telecom3.tutographql.model.User;
 
 public class LinkRepository {
@@ -35,15 +36,21 @@ public class LinkRepository {
 	}
 
 	public List<User> getAllUsers() {
-		String queryString = "{ search(query: \"type:user\", first: 100, type: USER) { userCount pageInfo { endCursor hasNextPage } edges { node { ... on User { login name } } } } }";
+		String queryString = "{ search(query: \"type:user\", first: 100, type: USER) { userCount pageInfo { endCursor hasNextPage } edges { node { ... on User { login name repositories { totalCount }} } } } }";
 		JSONObject responseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
 		JSONArray jsonArray = responseFromGithub.getJSONObject("data")
 				.getJSONObject("search")
 				.getJSONArray("edges");
 	
 		for (int i = 0; i < jsonArray.length(); i++) {
+			Repository repository = new Repository(jsonArray.getJSONObject(i)
+									.getJSONObject("node")
+									.getJSONObject("repositories")
+									.getInt("totalCount"));
+			
 			saveUser(new User(jsonArray.getJSONObject(i).getJSONObject("node").getString("login"),
-					jsonArray.getJSONObject(i).getJSONObject("node").getString("name")));
+					          jsonArray.getJSONObject(i).getJSONObject("node").getString("name"),
+					          repository));
 		}
 		
 		/*REQUETEE POUR UPDATE LE CURSOR*/
