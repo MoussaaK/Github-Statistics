@@ -26,10 +26,17 @@ public class LinkRepository {
 				.getJSONObject("user")
 				.getJSONObject("repositories")
 				.getJSONArray("nodes");
-
+		
+		String description;
 		for (int i = 0; i < jsonArray.length(); i++) {
+			try {
+				description = jsonArray.getJSONObject(i).getString("description");
+			} catch (Exception e) {
+				description = "";
+			}
+			
 			saveLink(new Link(jsonArray.getJSONObject(i).getString("url"),
-					jsonArray.getJSONObject(i).getString("description")));
+					description));
 		}
 
 		return links;
