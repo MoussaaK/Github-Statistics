@@ -32,19 +32,6 @@
 
 ## Search JAVA REPOS and COMMITS
 {
-  rateLimit {
-    cost
-    limit
-    remaining
-    resetAt
-  }
-  {
-  rateLimit {
-    cost
-    limit
-    remaining
-    resetAt
-  }
   search(query: "language:java", type: REPOSITORY, last: 100) {
     repositoryCount
     pageInfo {
@@ -172,12 +159,6 @@
 
 ## Forks, Stars and PR per Java repositories
 {
-  rateLimit {
-    cost
-    limit
-    remaining
-    resetAt
-  }
   search(query: "language:java stars:>10000", type: REPOSITORY, first: 100) {
     repositoryCount
     pageInfo {
@@ -205,7 +186,7 @@
 }
 
 
-## Orgnization
+## Organization
 {
   repositoryOwner(login: "google") {
     ... on User {
