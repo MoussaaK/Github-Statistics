@@ -24,7 +24,7 @@ public class Query implements GraphQLRootResolver {
         return linkRepository.getAllUsers();
     }
     
-    public List<Company> getCompanyData() {
-        return linkRepository.getCompanyData();
+    public List<Company> someCompaniesData() {
+        return linkRepository.getSomeCompaniesData();
     }
 }

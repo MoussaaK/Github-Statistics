@@ -10,11 +10,10 @@ public class Company {
 		super();
 	}
 
-	public Company(String companyName, int numberOfMembers,int numberOfRepositories) {
+	public Company(String companyName, int numberOfMembers, int numberOfRepositories) {
 		this.setCompanyName(companyName);
 		this.numberOfMembers = numberOfMembers;
-		this.numberOfMembers = numberOfMembers;
-
+		this.numberOfRepositories = numberOfRepositories;
 	}
 
 	public int getNumberOfMembers() {
