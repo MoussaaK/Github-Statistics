@@ -1,6 +1,7 @@
 package org.konate.telecom3.tutographql.model;
 
 public class Company {
+	
 	private String companyName;
 	private int numberOfMembers;
 	private int numberOfRepositories;
@@ -39,6 +40,4 @@ public class Company {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
-
-
 }
