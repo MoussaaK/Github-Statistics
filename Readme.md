@@ -28,8 +28,6 @@
   }
 }
 
-
-
 ## Search JAVA REPOS and COMMITS
 {
   search(query: "language:java", type: REPOSITORY, last: 100) {
@@ -205,7 +203,12 @@
   }
 }
 
+## Links
+<http://localhost:8080/graphql?query={someCompaniesData{companyName,numberOfMembers,numberOfRepositories}}>
 
+<http://localhost:8080/graphql?query={allUsers{login,name}}>
+
+<http://localhost:8080/graphql?query={allLinks{url,description}}>
 
 
 
