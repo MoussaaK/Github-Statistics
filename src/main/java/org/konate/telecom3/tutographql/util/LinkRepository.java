@@ -25,19 +25,6 @@ public class LinkRepository {
 	public List<Link> getAllLinks()  {
 		String queryString = "{user(login: \"MoussaaK\") { name repositories(last: 100) { nodes { url, description}}}}";
 		JSONObject responseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
-		//<<<<<<< HEAD
-		//		
-		//			JSONArray jsonArray = responseFromGithub.getJSONObject("data")
-		//					.getJSONObject("user")
-		//					.getJSONObject("repositories")
-		//					.getJSONArray("nodes");
-		//
-		//			for (int i = 0; i < jsonArray.length(); i++) {
-		//				saveLink(new Link(jsonArray.getJSONObject(i).getString("url"),
-		//						jsonArray.getJSONObject(i).getString("description")));
-		//			}
-
-
 
 		JSONArray jsonArray = responseFromGithub.getJSONObject("data")
 				.getJSONObject("user")
@@ -58,8 +45,6 @@ public class LinkRepository {
 
 		return links;
 	}
-
-
 
 	public List<User> getAllUsers() {
 		String queryString = "{ search(query: \"type:user\", first: 100, type: USER) { userCount pageInfo { endCursor hasNextPage } edges { node { ... on User { login name repositories { totalCount }} } } } }";
@@ -108,8 +93,6 @@ public class LinkRepository {
 		JSONObject responseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
 		JSONObject jsonNode = responseFromGithub.getJSONObject("data");
 
-
-
 		saveCompany(
 				new Company(
 						jsonNode.getJSONObject("repositoryOwner").getString("name"),
@@ -117,7 +100,6 @@ public class LinkRepository {
 						jsonNode.getJSONObject("repositories").getInt("totalcount")
 						)
 				);
-
 
 		return companies;
 	}
@@ -133,6 +115,4 @@ public class LinkRepository {
 	public void saveCompany(Company company) {
 		companies.add(company);
 	}
-
-
 }
