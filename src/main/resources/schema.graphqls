@@ -32,7 +32,7 @@ type Company{
 type Query {
   allLinks: [Link]
   allUsers: [User]
-  getCompanyData: [Company]
+  someCompaniesData: [Company]
 }
 
 type Mutation {

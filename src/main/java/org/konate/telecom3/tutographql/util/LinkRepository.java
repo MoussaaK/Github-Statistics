@@ -71,36 +71,23 @@ public class LinkRepository {
 		return users;
 	}
 
-	/*Getting data related to a company's github account*/
-	public List<Company> getCompanyData() {
+	/*Getting data related to companies' github account*/
+	public List<Company> getSomeCompaniesData() {
+		String queryString = null;
+		String[] companiesName = {"google", "microsoft", "facebook", "oracle", "eclipse", "linkedin", "alibaba"};
+		for (String name : companiesName) {
+			queryString = "{ repositoryOwner(login: " + name + ") { ... on Organization { name members { totalCount } repositories { totalCount }}}}"; 
+			JSONObject responseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
+			JSONObject jsonNode = responseFromGithub.getJSONObject("data");
 
-		String queryString = "{\n" + 
-				"  repositoryOwner(login: \"google\") {\n" + 
-				"    ... on User {\n" + 
-				"      avatarUrl\n" + 
-				"      bio\n" + 
-				"    }\n" + 
-				"    ... on Organization {\n" + 
-				"      name\n" + 
-				"      members {\n" + 
-				"        totalCount\n" + 
-				"      }\n" + 
-				"      repositories {\n" + 
-				"        totalCount\n" + 
-				"      }\n" + 
-				"    }\n" + 
-				"  }\n" + 
-				"}";
-		JSONObject responseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
-		JSONObject jsonNode = responseFromGithub.getJSONObject("data");
-
-		saveCompany(
-				new Company(
-						jsonNode.getJSONObject("repositoryOwner").getString("name"),
-						jsonNode.getJSONObject("members").getInt("totalcount"),
-						jsonNode.getJSONObject("repositories").getInt("totalcount")
-						)
-				);
+			saveCompany(
+					new Company(
+							jsonNode.getJSONObject("repositoryOwner").getString("name"),
+							jsonNode.getJSONObject("repositoryOwner").getJSONObject("members").getInt("totalCount"),
+							jsonNode.getJSONObject("repositoryOwner").getJSONObject("repositories").getInt("totalCount")
+							)
+					);
+		}
 
 		return companies;
 	}
