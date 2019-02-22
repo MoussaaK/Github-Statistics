@@ -8,6 +8,11 @@ public class Repository {
 		super();
 	}
 	
+	public Repository(Nodes node) {
+		super();
+		this.node = node;
+	}
+
 	public Repository(int totalCount) {
 		super();
 		this.totalCount = totalCount;
