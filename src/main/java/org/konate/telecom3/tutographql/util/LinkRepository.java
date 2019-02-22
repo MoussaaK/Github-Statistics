@@ -73,7 +73,7 @@ public class LinkRepository {
 		/*users.addAll(Utility.getMoreUsers(responseFromGithub,
 				"{ search(query: \"type:user\", first: 100,",
 				" type: USER) { userCount pageInfo { endCursor hasNextPage } edges { node { ... on User { login name repositories { totalCount }} } } } }"));
-		*/
+		 */
 		return users;
 	}
 
@@ -131,6 +131,42 @@ public class LinkRepository {
 				"{ search(query: \"is:public stars:>10000\", first: 100, ",
 				", type: REPOSITORY) { repositoryCount pageInfo { endCursor startCursor hasNextPage } repositories: edges { repository: node { ... on Repository { nameWithOwner name primaryLanguage { name } } } } } }"));
 		return repositories;
+	}
+
+	public int getAllUsersCount() {
+		String queryString = "{ search(query: \"type:user\", first: 100, type: USER) { userCount } }";
+		JSONObject responseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
+
+		return  responseFromGithub.getJSONObject("data")
+				.getJSONObject("search")
+				.getInt("userCount");
+	}
+	
+	public int getAllRepositoryCount() {
+		String queryString = "{ search(query: \"is:public\", first: 100, type: REPOSITORY) { repositoryCount } }";
+		JSONObject responseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
+
+		return  responseFromGithub.getJSONObject("data")
+				.getJSONObject("search")
+				.getInt("repositoryCount");
+	}
+	
+	public int getAllOpenIssueCount() {
+		String queryString = "{ search(query: \"type:issue is:open\", first: 100, type: ISSUE) { issueCount } }";
+		JSONObject responseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
+
+		return  responseFromGithub.getJSONObject("data")
+				.getJSONObject("search")
+				.getInt("issueCount");
+	}
+	
+	public int getAllClosedIssueCount() {
+		String queryString = "{ search(query: \"type:issue is:closed\", first: 100, type: ISSUE) { issueCount } }";
+		JSONObject responseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
+
+		return  responseFromGithub.getJSONObject("data")
+				.getJSONObject("search")
+				.getInt("issueCount");
 	}
 
 	public void saveLink(Link link) {

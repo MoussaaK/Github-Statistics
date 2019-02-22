@@ -32,4 +32,20 @@ public class Query implements GraphQLRootResolver {
     public List<Node> someRepositories() {
         return linkRepository.getSomeRepositories();
     }
+    
+    public int allUsersCount() {
+    	return linkRepository.getAllUsersCount();
+    }
+    
+    public int allRepositoryCount() {
+    	return linkRepository.getAllRepositoryCount();
+    }
+    
+    public int allOpenIssueCount() {
+    	return linkRepository.getAllOpenIssueCount();
+    }
+    
+    public int allClosedIssueCount() {
+    	return linkRepository.getAllClosedIssueCount();
+    }
 }
