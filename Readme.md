@@ -246,5 +246,13 @@
 
 <http://localhost:8080/graphql?query={someRepositories{name,primaryLanguage}}>
 
+<http://localhost:8080/graphql?query={allClosedIssueCount}>
+
+<http://localhost:8080/graphql?query={allOpenIssueCount}>
+
+<http://localhost:8080/graphql?query={allUsersCount}>
+
+<http://localhost:8080/graphql?query={allRepositoryCount}>
+
 
 
