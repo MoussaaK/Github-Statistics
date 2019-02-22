@@ -183,17 +183,12 @@
   }
 }
 
-
 ## Organization
 {
   repositoryOwner(login: "google") {
-    ... on User {
-      avatarUrl
-      bio
-    }
     ... on Organization {
       name
-      members {
+      membersWithRole {
         totalCount
       }
       repositories {
@@ -203,12 +198,53 @@
   }
 }
 
-## Links
-<http://localhost:8080/graphql?query={someCompaniesData{companyName,numberOfMembers,numberOfRepositories}}>
+## Eclipse Foundation's first 100 repos' commit size 
+{
+  repositoryOwner(login: "eclipse") {
+    ... on Organization {
+      name
+      membersWithRole {
+        totalCount
+      }
+      repositories(first: 100) {
+        totalDiskUsage
+        totalCount
+        nodes {
+          ... on Repository {
+            defaultBranchRef {
+              target {
+                ... on Commit {
+                  history {
+                    totalCount
+                  }
+                  commitObjects: tree {
+                    commits: entries {
+                      object {
+                        ... on Blob {
+                          byteSize
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
-<http://localhost:8080/graphql?query={allUsers{login,name}}>
+## Links
+
+<http://localhost:8080/graphql?query={someCompaniesData{companyName,numberOfMembers,numberOfRepositories,avarageCommitCount,totalRepositoriesDiskUsage}}>
+
+<http://localhost:8080/graphql?query={allUsers{login,name,repositories{totalCount}}}>
 
 <http://localhost:8080/graphql?query={allLinks{url,description}}>
+
+<http://localhost:8080/graphql?query={someRepositories{name,primaryLanguage}}>
 
 
 
