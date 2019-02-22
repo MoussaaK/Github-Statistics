@@ -24,7 +24,7 @@ type User {
   repositories: Repository
 }
 
-type Company{
+type Company {
   companyName: String!
   numberOfMembers: Int
   numberOfRepositories: Int
@@ -37,6 +37,10 @@ type Query {
   allUsers: [User]
   someCompaniesData: [Company]
   someRepositories: [Node]
+  allRepositoryCount: Int
+  allUsersCount: Int
+  allOpenIssueCount: Int
+  allClosedIssueCount: Int
 }
 
 type Mutation {
