@@ -19,6 +19,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.konate.telecom3.tutographql.model.Node;
 import org.konate.telecom3.tutographql.model.User;
 
 public class Utility {
@@ -86,7 +87,8 @@ public class Utility {
 		return null;
 	}
 
-	public static List<User> getMoreUsers(JSONObject firstResonseFromGithub) {
+	//Fetch more User given the query cursor, resource limitation : 500,000 nodes
+	public static List<User> getMoreUsers(JSONObject firstResonseFromGithub, String queryStringBeforeEndCursor, String queryStringAfterEndCursor) {
 
 		boolean hasNextPage = firstResonseFromGithub.getJSONObject("data")
 				.getJSONObject("search")
@@ -101,12 +103,10 @@ public class Utility {
 		List<JSONArray> jsonArrays = new ArrayList<>();
 		List<User> moreUsers = new ArrayList<>();
 		String queryString;
-
 		while (hasNextPage) {
-			queryString = "{ search(query: \"type:user\", first: 100, after:\"" + endCursor + "\", type: USER) { userCount pageInfo { endCursor hasNextPage } edges { node { ... on User { login name } } } } }";
+			queryString = queryStringBeforeEndCursor + "after:\"" + endCursor + "\"" + queryStringAfterEndCursor;
 			JSONObject newResponseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
 
-			//Mises à jour nécessaires pour la navigation
 			hasNextPage = newResponseFromGithub.getJSONObject("data")
 					.getJSONObject("search")
 					.getJSONObject("pageInfo")
@@ -120,18 +120,68 @@ public class Utility {
 			array = newResponseFromGithub.getJSONObject("data")
 					.getJSONObject("search")
 					.getJSONArray("edges");
-			//System.out.println("array -> " + array);
 			jsonArrays.add(array);
 		}
-	    //System.out.println("jsonArrays ->" + jsonArrays);
 
 		for (JSONArray jsonArray : jsonArrays) {
 			for (int i = 0; i < jsonArray.length(); i++) {
-				moreUsers.add(new User(jsonArray.getJSONObject(i).getJSONObject("node").getString("login"),
-						jsonArray.getJSONObject(i).getJSONObject("node").getString("name")));
+				if (!jsonArray.getJSONObject(i).isNull("node")) {
+					moreUsers.add(new User(jsonArray.getJSONObject(i).getJSONObject("node").getString("login"),
+							jsonArray.getJSONObject(i).getJSONObject("node").getString("name")));
+				}
 			}
 		}
 
 		return moreUsers;
+	}
+
+
+	//Fetch more Repository given the query cursor, resource limitation : 500,000 nodes
+	public static List<Node> getMoreRepositories(JSONObject firstResonseFromGithub, String queryStringBeforeEndCursor, String queryStringAfterEndCursor) {
+
+		boolean hasNextPage = firstResonseFromGithub.getJSONObject("data")
+				.getJSONObject("search")
+				.getJSONObject("pageInfo")
+				.getBoolean("hasNextPage");
+		String endCursor = firstResonseFromGithub.getJSONObject("data")
+				.getJSONObject("search")
+				.getJSONObject("pageInfo")
+				.getString("endCursor");
+		List<Node> moreRepositories = new ArrayList<>();
+
+		JSONArray array = null;
+		List<JSONArray> jsonArrays = new ArrayList<>();
+		String queryString;
+		while (hasNextPage) {
+			queryString = queryStringBeforeEndCursor + "after:\"" + endCursor + "\"" + queryStringAfterEndCursor;
+			JSONObject newResponseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
+
+			hasNextPage = newResponseFromGithub.getJSONObject("data")
+					.getJSONObject("search")
+					.getJSONObject("pageInfo")
+					.getBoolean("hasNextPage");
+
+			endCursor = newResponseFromGithub.getJSONObject("data")
+					.getJSONObject("search")
+					.getJSONObject("pageInfo")
+					.getString("endCursor");
+
+			array = newResponseFromGithub.getJSONObject("data")
+					.getJSONObject("search")
+					.getJSONArray("repositories");
+			jsonArrays.add(array);
+		}
+
+		for (JSONArray jsonArray : jsonArrays) {
+			for (int i = 0; i < jsonArray.length(); i++) {
+				if (!jsonArray.getJSONObject(i).getJSONObject("repository").isNull("primaryLanguage")) {
+					moreRepositories.add(new Node(jsonArray.getJSONObject(i).getJSONObject("repository").getString("name"),
+							jsonArray.getJSONObject(i).getJSONObject("repository").getJSONObject("primaryLanguage").getString("name")));
+
+				}
+			}
+		}
+
+		return moreRepositories;
 	}
 }
