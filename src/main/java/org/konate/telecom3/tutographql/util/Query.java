@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.konate.telecom3.tutographql.model.Company;
 import org.konate.telecom3.tutographql.model.Link;
+import org.konate.telecom3.tutographql.model.Node;
 import org.konate.telecom3.tutographql.model.User;
 
 import com.coxautodev.graphql.tools.GraphQLRootResolver;
@@ -26,5 +27,9 @@ public class Query implements GraphQLRootResolver {
     
     public List<Company> someCompaniesData() {
         return linkRepository.getSomeCompaniesData();
+    }
+    
+    public List<Node> someRepositories() {
+        return linkRepository.getSomeRepositories();
     }
 }
