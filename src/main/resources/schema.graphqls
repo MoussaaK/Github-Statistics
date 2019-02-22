@@ -6,6 +6,7 @@ type Link {
 type Node {
   name: String
   description: String
+  primaryLanguage: String
 }
 
 type Nodes {
@@ -27,12 +28,15 @@ type Company{
   companyName: String!
   numberOfMembers: Int
   numberOfRepositories: Int
+  avarageCommitCount: Int
+  totalRepositoriesDiskUsage: Int
 }
 
 type Query {
   allLinks: [Link]
   allUsers: [User]
   someCompaniesData: [Company]
+  someRepositories: [Node]
 }
 
 type Mutation {
