@@ -20,6 +20,20 @@
 <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0"
 	href="styles/shards-dashboards.1.1.0.min.css">
 <link rel="stylesheet" href="styles/extras.1.1.0.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 </head>
 <body class="h-100">
@@ -532,62 +546,106 @@
 					<!--               </div> -->
 					<!-- End Discussions Component -->
 					<!-- Top Referrals Component -->
-					<div class="col-lg-3 col-md-12 col-sm-12 mb-4">
-						<div class="card card-small">
-							<div class="card-header border-bottom">
-								<h6 class="m-0">Companies on Github</h6>
-							</div>
-							<div class="card-body p-0">
-								<ul class="list-group list-group-small list-group-flush">
-									<li class="list-group-item d-flex px-3"><span
-										class="text-semibold text-fiord-blue">GitHub</span> <span
-										class="ml-auto text-right text-semibold text-reagent-gray">19,291</span>
-									</li>
-									<li class="list-group-item d-flex px-3"><span
-										class="text-semibold text-fiord-blue">Stack Overflow</span> <span
-										class="ml-auto text-right text-semibold text-reagent-gray">11,201</span>
-									</li>
-									<li class="list-group-item d-flex px-3"><span
-										class="text-semibold text-fiord-blue">Hacker News</span> <span
-										class="ml-auto text-right text-semibold text-reagent-gray">9,291</span>
-									</li>
-									<li class="list-group-item d-flex px-3"><span
-										class="text-semibold text-fiord-blue">Reddit</span> <span
-										class="ml-auto text-right text-semibold text-reagent-gray">8,281</span>
-									</li>
-									<li class="list-group-item d-flex px-3"><span
-										class="text-semibold text-fiord-blue">The Next Web</span> <span
-										class="ml-auto text-right text-semibold text-reagent-gray">7,128</span>
-									</li>
-									<li class="list-group-item d-flex px-3"><span
-										class="text-semibold text-fiord-blue">Tech Crunch</span> <span
-										class="ml-auto text-right text-semibold text-reagent-gray">6,218</span>
-									</li>
-									<li class="list-group-item d-flex px-3"><span
-										class="text-semibold text-fiord-blue">YouTube</span> <span
-										class="ml-auto text-right text-semibold text-reagent-gray">1,218</span>
-									</li>
-									<li class="list-group-item d-flex px-3"><span
-										class="text-semibold text-fiord-blue">Adobe</span> <span
-										class="ml-auto text-right text-semibold text-reagent-gray">827</span>
-									</li>
-								</ul>
-							</div>
-							<div class="card-footer border-top">
-								<div class="row">
-									<div class="col">
-										<select class="custom-select custom-select-sm">
-											<option selected>Last Week</option>
-											<option value="1">Today</option>
-											<option value="2">Last Month</option>
-											<option value="3">Last Year</option>
-										</select>
-									</div>
-									<div class="col text-right view-report">
-										<a href="#">Full report &rarr;</a>
-									</div>
-								</div>
-							</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+						<div class="table100 ver1 m-b-110">
+							<table data-vertable="ver1" id="companiesTable">
+
+								<thead>Some Companies Data
+									<tr class="row100 head">
+										<th class="column100 column1" data-column="column1"></th>
+										<th class="column100 column2" data-column="column2">Members</th>
+										<th class="column100 column3" data-column="column3">Repositories</th>
+										<th class="column100 column4" data-column="column4">Average Commit</th>
+										<th class="column100 column5" data-column="column5">Repositories Size</th>
+									</tr>
+								</thead>
+<!-- 								<tbody> -->
+<!-- 									<tr class="row100"> -->
+<!-- 										<td class="column100 column1" data-column="column1"></td><td class="column100 column2" data-column="column2"></td> -->
+<!-- 										<td class="column100 column3" data-column="column3"></td> -->
+<!-- 										<td class="column100 column4" data-column="column4"></td> -->
+<!-- 										<td class="column100 column5" data-column="column5"></td> -->
+
+<!-- 									</tr> -->
+
+<!-- 									<tr class="row100"> -->
+<!-- 										<td class="column100 column1" data-column="column1"> -->
+<!-- 											</td> -->
+<!-- 										<td class="column100 column2" data-column="column2"></td> -->
+<!-- 										<td class="column100 column3" data-column="column3"></td> -->
+<!-- 										<td class="column100 column4" data-column="column4"></td> -->
+<!-- 										<td class="column100 column5" data-column="column5"></td> -->
+<!-- 									</tr> -->
+
+<!-- 									<tr class="row100"> -->
+<!-- 										<td class="column100 column1" data-column="column1"> -->
+<!-- 											</td> -->
+<!-- 										<td class="column100 column2" data-column="column2"></td> -->
+<!-- 										<td class="column100 column3" data-column="column3"></td> -->
+<!-- 										<td class="column100 column4" data-column="column4"></td> -->
+<!-- 										<td class="column100 column5" data-column="column5"></td> -->
+
+<!-- 									</tr> -->
+
+<!-- 									<tr class="row100"> -->
+<!-- 										<td class="column100 column1" data-column="column1">  -->
+<!-- 											</td> -->
+<!-- 										<td class="column100 column2" data-column="column2"></td> -->
+<!-- 										<td class="column100 column3" data-column="column3"></td> -->
+<!-- 										<td class="column100 column4" data-column="column4"></td> -->
+<!-- 										<td class="column100 column5" data-column="column5"></td> -->
+
+<!-- 									</tr> -->
+
+<!-- 									<tr class="row100"> -->
+<!-- 										<td class="column100 column1" data-column="column1"> -->
+<!-- 											</td> -->
+<!-- 										<td class="column100 column2" data-column="column2"></td> -->
+<!-- 										<td class="column100 column3" data-column="column3"></td> -->
+<!-- 										<td class="column100 column4" data-column="column4"></td> -->
+<!-- 										<td class="column100 column5" data-column="column5"></td> -->
+
+<!-- 									</tr> -->
+
+<!-- 									<tr class="row100"> -->
+<!-- 										<td class="column100 column1" data-column="column1"> -->
+<!-- 											</td> -->
+<!-- 										<td class="column100 column2" data-column="column2"></td> -->
+<!-- 										<td class="column100 column3" data-column="column3"></td> -->
+<!-- 										<td class="column100 column4" data-column="column4"></td> -->
+<!-- 										<td class="column100 column5" data-column="column5"></td> -->
+
+<!-- 									</tr> -->
+
+<!-- 									<tr class="row100"> -->
+<!-- 										<td class="column100 column1" data-column="column1"> -->
+<!-- 											</td> -->
+<!-- 										<td class="column100 column2" data-column="column2"></td> -->
+<!-- 										<td class="column100 column3" data-column="column3"></td> -->
+<!-- 										<td class="column100 column4" data-column="column4"></td> -->
+<!-- 										<td class="column100 column5" data-column="column5"></td> -->
+
+<!-- 									</tr> -->
+
+<!-- 									<tr class="row100"> -->
+<!-- 										<td class="column100 column1" data-column="column1"></td> -->
+<!-- 										<td class="column100 column2" data-column="column2"></td> -->
+<!-- 										<td class="column100 column3" data-column="column3"></td> -->
+<!-- 										<td class="column100 column4" data-column="column4"></td> -->
+<!-- 										<td class="column100 column5" data-column="column5"></td> -->
+
+<!-- 									</tr> -->
+
+<!-- 									<tr class="row100"> -->
+<!-- 										<td class="column100 column1" data-column="column1"></td> -->
+<!-- 										<td class="column100 column2" data-column="column2"></td> -->
+<!-- 										<td class="column100 column3" data-column="column3"></td> -->
+<!-- 										<td class="column100 column4" data-column="column4"></td> -->
+<!-- 										<td class="column100 column5" data-column="column5"></td> -->
+
+<!-- 									</tr> -->
+<!-- 								</tbody> -->
+							</table>
 						</div>
 					</div>
 					<!-- End Top Referrals Component -->
