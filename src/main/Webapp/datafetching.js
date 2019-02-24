@@ -1,6 +1,7 @@
 
 
 
+
 //This do the Ajax request when the DOM is ready, not when the window's loading is done
 //It would have been too long
 document.onreadystatechange = function(e)
@@ -56,6 +57,10 @@ document.onreadystatechange = function(e)
 //window.onload = function () {
 
 //}
+
+
+
+
 
 
 
