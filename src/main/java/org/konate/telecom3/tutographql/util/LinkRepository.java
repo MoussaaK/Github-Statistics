@@ -1,7 +1,9 @@
 package org.konate.telecom3.tutographql.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -108,8 +110,10 @@ public class LinkRepository {
 							avarageCommitCount)
 					);
 		}
-
-		return companies;
+		List<Company> companiesTmp = companies.stream()
+											  .distinct()
+											  .collect(Collectors.toList());
+		return companiesTmp;
 	}
 
 	public List<Node> getSomeRepositories() {
@@ -141,7 +145,7 @@ public class LinkRepository {
 				.getJSONObject("search")
 				.getInt("userCount");
 	}
-	
+
 	public int getAllRepositoryCount() {
 		String queryString = "{ search(query: \"is:public\", first: 100, type: REPOSITORY) { repositoryCount } }";
 		JSONObject responseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
@@ -150,7 +154,7 @@ public class LinkRepository {
 				.getJSONObject("search")
 				.getInt("repositoryCount");
 	}
-	
+
 	public int getAllOpenIssueCount() {
 		String queryString = "{ search(query: \"type:issue is:open\", first: 100, type: ISSUE) { issueCount } }";
 		JSONObject responseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
@@ -159,7 +163,7 @@ public class LinkRepository {
 				.getJSONObject("search")
 				.getInt("issueCount");
 	}
-	
+
 	public int getAllClosedIssueCount() {
 		String queryString = "{ search(query: \"type:issue is:closed\", first: 100, type: ISSUE) { issueCount } }";
 		JSONObject responseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
