@@ -126,8 +126,15 @@ public class Utility {
 		for (JSONArray jsonArray : jsonArrays) {
 			for (int i = 0; i < jsonArray.length(); i++) {
 				if (!jsonArray.getJSONObject(i).isNull("node")) {
+					String name = null;
+					try {
+						name = jsonArray.getJSONObject(i).getJSONObject("node").getString("name");
+
+					} catch (Exception e) {
+
+					}
 					moreUsers.add(new User(jsonArray.getJSONObject(i).getJSONObject("node").getString("login"),
-							jsonArray.getJSONObject(i).getJSONObject("node").getString("name")));
+							name));
 				}
 			}
 		}

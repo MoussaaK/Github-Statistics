@@ -1,7 +1,6 @@
 package org.konate.telecom3.tutographql.util;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,18 +63,26 @@ public class LinkRepository {
 					.getJSONObject("repositories")
 					.getInt("totalCount"));
 			if (!jsonArray.getJSONObject(i).isNull("node")) {
+				
+				String name = null;
+				try {
+					name = jsonArray.getJSONObject(i).getJSONObject("node").getString("name");
+					
+				} catch (Exception e) {
+					
+				}
 				saveUser(new User(jsonArray.getJSONObject(i).getJSONObject("node").getString("login"),
-						jsonArray.getJSONObject(i).getJSONObject("node").getString("name"),
+						name,
 						repository));
 			}
 		}
 
 		//Fetching more Users
 		//Exception thrown because some names are chinese => not String
-		/*users.addAll(Utility.getMoreUsers(responseFromGithub,
+		users.addAll(Utility.getMoreUsers(responseFromGithub,
 				"{ search(query: \"type:user\", first: 100,",
 				" type: USER) { userCount pageInfo { endCursor hasNextPage } edges { node { ... on User { login name repositories { totalCount }} } } } }"));
-		 */
+		 
 		return users;
 	}
 
