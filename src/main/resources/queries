@@ -236,23 +236,7 @@
   }
 }
 
-## Links
 
-<http://localhost:8080/graphql?query={someCompaniesData{companyName,numberOfMembers,numberOfRepositories,avarageCommitCount,totalRepositoriesDiskUsage}}>
-
-<http://localhost:8080/graphql?query={allUsers{login,name,repositories{totalCount}}}>
-
-<http://localhost:8080/graphql?query={allLinks{url,description}}>
-
-<http://localhost:8080/graphql?query={someRepositories{name,primaryLanguage}}>
-
-<http://localhost:8080/graphql?query={allClosedIssueCount}>
-
-<http://localhost:8080/graphql?query={allOpenIssueCount}>
-
-<http://localhost:8080/graphql?query={allUsersCount}>
-
-<http://localhost:8080/graphql?query={allRepositoryCount}>
 
 
 

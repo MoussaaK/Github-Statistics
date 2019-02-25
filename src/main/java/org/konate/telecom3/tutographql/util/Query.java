@@ -3,6 +3,7 @@ package org.konate.telecom3.tutographql.util;
 import java.util.List;
 
 import org.konate.telecom3.tutographql.model.Company;
+import org.konate.telecom3.tutographql.model.Language;
 import org.konate.telecom3.tutographql.model.Link;
 import org.konate.telecom3.tutographql.model.Node;
 import org.konate.telecom3.tutographql.model.User;
@@ -47,5 +48,9 @@ public class Query implements GraphQLRootResolver {
     
     public int allClosedIssueCount() {
     	return linkRepository.getAllClosedIssueCount();
+    }
+    
+    public List<Language> someLanguages() {
+    	return linkRepository.getSomeLanguages();
     }
 }

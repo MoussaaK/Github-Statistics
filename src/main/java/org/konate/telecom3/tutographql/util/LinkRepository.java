@@ -2,11 +2,15 @@ package org.konate.telecom3.tutographql.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.konate.telecom3.tutographql.model.Company;
+import org.konate.telecom3.tutographql.model.Language;
 import org.konate.telecom3.tutographql.model.Link;
 import org.konate.telecom3.tutographql.model.Node;
 import org.konate.telecom3.tutographql.model.Repository;
@@ -18,12 +22,14 @@ public class LinkRepository {
 	private final List<User> users;
 	private final List<Company> companies;
 	private final List<Node> repositories;
+	private final List<Language> languages;
 
 	public LinkRepository() {
 		links = new ArrayList<>();
 		users = new ArrayList<>();
 		companies = new ArrayList<>();
 		repositories = new ArrayList<>();
+		languages = new ArrayList<>();
 	}
 
 	public List<Link> getAllLinks()  {
@@ -63,13 +69,13 @@ public class LinkRepository {
 					.getJSONObject("repositories")
 					.getInt("totalCount"));
 			if (!jsonArray.getJSONObject(i).isNull("node")) {
-				
+
 				String name = null;
 				try {
 					name = jsonArray.getJSONObject(i).getJSONObject("node").getString("name");
-					
+
 				} catch (Exception e) {
-					
+
 				}
 				saveUser(new User(jsonArray.getJSONObject(i).getJSONObject("node").getString("login"),
 						name,
@@ -82,7 +88,7 @@ public class LinkRepository {
 		users.addAll(Utility.getMoreUsers(responseFromGithub,
 				"{ search(query: \"type:user\", first: 100,",
 				" type: USER) { userCount pageInfo { endCursor hasNextPage } edges { node { ... on User { login name repositories { totalCount }} } } } }"));
-		 
+
 		return users;
 	}
 
@@ -118,8 +124,8 @@ public class LinkRepository {
 					);
 		}
 		List<Company> companiesTmp = companies.stream()
-											  .distinct()
-											  .collect(Collectors.toList());
+				.distinct()
+				.collect(Collectors.toList());
 		return companiesTmp;
 	}
 
@@ -178,6 +184,21 @@ public class LinkRepository {
 		return  responseFromGithub.getJSONObject("data")
 				.getJSONObject("search")
 				.getInt("issueCount");
+	}
+
+	public List<Language> getSomeLanguages(){
+		getSomeRepositories();
+		List<String> strings = new ArrayList<>();
+		repositories.forEach(repo -> strings.add(repo.getPrimaryLanguage()));
+
+		Map<String, Integer> frequencies = 
+				strings.stream().collect(Collectors.groupingBy(Function.identity(),
+						Collectors.summingInt(s -> 1)));
+		for (Entry<String, Integer> entry : frequencies.entrySet()) {
+			languages.add(new Language(entry.getKey(), entry.getValue()));
+		}
+		
+		return languages;
 	}
 
 	public void saveLink(Link link) {
