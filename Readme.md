@@ -85,3 +85,23 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Hat tip to anyone whose code was used
 * Inspiration
 * etc
+
+## Links
+
+<http://localhost:8080/graphql?query={someCompaniesData{companyName,numberOfMembers,numberOfRepositories,avarageCommitCount,totalRepositoriesDiskUsage}}>
+
+<http://localhost:8080/graphql?query={allUsers{login,name,repositories{totalCount}}}>
+
+<http://localhost:8080/graphql?query={allLinks{url,description}}>
+
+<http://localhost:8080/graphql?query={someRepositories{name,primaryLanguage}}>
+
+<http://localhost:8080/graphql?query={allClosedIssueCount}>
+
+<http://localhost:8080/graphql?query={allOpenIssueCount}>
+
+<http://localhost:8080/graphql?query={allUsersCount}>
+
+<http://localhost:8080/graphql?query={allRepositoryCount}>
+
+<http://localhost:8080/graphql?query={someLanguages{name,languageFrequency}}>
