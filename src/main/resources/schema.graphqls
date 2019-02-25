@@ -32,6 +32,11 @@ type Company {
   totalRepositoriesDiskUsage: Int
 }
 
+type Language {
+	name: String!
+	languageFrequency: Int!
+}
+
 type Query {
   allLinks: [Link]
   allUsers: [User]
@@ -41,6 +46,7 @@ type Query {
   allUsersCount: Int
   allOpenIssueCount: Int
   allClosedIssueCount: Int
+  someLanguages: [Language]
 }
 
 type Mutation {
