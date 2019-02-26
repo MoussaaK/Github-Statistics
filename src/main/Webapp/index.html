@@ -35,6 +35,9 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+	
 </head>
 <body class="h-100">
 	<div class="color-switcher animated">
@@ -359,7 +362,7 @@
 				<!-- End Small Stats Blocks -->
 				<div class="row">
 					<!-- Users Stats -->
-					<div class="col-lg-8 col-md-12 col-sm-12 mb-4">
+					<div class="col-lg-6 col-md-12 col-sm-12 mb-4">
 						<div class="card card-small">
 							<div class="card-header border-bottom">
 								<h6 class="m-0">Users</h6>
@@ -392,160 +395,17 @@
 						</div>
 					</div>
 					<!-- End Users Stats -->
-					<!-- Users By Device Stats -->
-					<div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-						<div class="card card-small h-100">
+					<!-- Repo By Langages Stats -->
+					<div class="col-lg-6 col-md-6 col-sm-12 mb-4" >
+						<div class="card card-small h-100" >
 							<div class="card-header border-bottom">
-								<h6 class="m-0"></h6>
+								<h6 class="m-0"> Languages Distribution</h6>
 							</div>
-							<div class="card-body d-flex py-0">
-								<canvas height="220" class="blog-users-by-device m-auto"></canvas>
+							<div class="card-body d-flex py-0" id="langagesPieChart">
 							</div>
-<!-- 							<div class="card-footer border-top"> -->
-<!-- 								<div class="row"> -->
-<!-- 									<div class="col"> -->
-<!-- 										<select class="custom-select custom-select-sm" -->
-<!-- 											style="max-width: 130px;"> -->
-<!-- 											<option selected>Last Week</option> -->
-<!-- 											<option value="1">Today</option> -->
-<!-- 											<option value="2">Last Month</option> -->
-<!-- 											<option value="3">Last Year</option> -->
-<!-- 										</select> -->
-<!-- 									</div> -->
-<!-- 									<div class="col text-right view-report"> -->
-<!-- 										<a href="#">Full report &rarr;</a> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
+
 						</div>
 					</div>
-					<!-- End Users By Device Stats -->
-					<!--               New Draft Component -->
-					<!--               <div class="col-lg-4 col-md-6 col-sm-12 mb-4"> -->
-					<!--                 Quick Post -->
-					<!--                 <div class="card card-small h-100"> -->
-					<!--                   <div class="card-header border-bottom"> -->
-					<!--                     <h6 class="m-0">New Draft</h6> -->
-					<!--                   </div> -->
-					<!--                   <div class="card-body d-flex flex-column"> -->
-					<!--                     <form class="quick-post-form"> -->
-					<!--                       <div class="form-group"> -->
-					<!--                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Brave New World"> </div> -->
-					<!--                       <div class="form-group"> -->
-					<!--                         <textarea class="form-control" placeholder="Words can be like X-rays if you use them properly..."></textarea> -->
-					<!--                       </div> -->
-					<!--                       <div class="form-group mb-0"> -->
-					<!--                         <button type="submit" class="btn btn-accent">Create Draft</button> -->
-					<!--                       </div> -->
-					<!--                     </form> -->
-					<!--                   </div> -->
-					<!--                 </div> -->
-					<!--                 End Quick Post -->
-					<!--               </div> -->
-					<!-- End New Draft Component -->
-					<!-- Discussions Component -->
-					<!--               <div class="col-lg-5 col-md-12 col-sm-12 mb-4"> -->
-					<!--                 <div class="card card-small blog-comments"> -->
-					<!--                   <div class="card-header border-bottom"> -->
-					<!--                     <h6 class="m-0">Discussions</h6> -->
-					<!--                   </div> -->
-					<!--                   <div class="card-body p-0"> -->
-					<!--                     <div class="blog-comments__item d-flex p-3"> -->
-					<!--                       <div class="blog-comments__avatar mr-3"> -->
-					<!--                         <img src="images/avatars/1.jpg" alt="User avatar" /> </div> -->
-					<!--                       <div class="blog-comments__content"> -->
-					<!--                         <div class="blog-comments__meta text-muted"> -->
-					<!--                           <a class="text-secondary" href="#">James Johnson</a> on -->
-					<!--                           <a class="text-secondary" href="#">Hello World!</a> -->
-					<!--                           <span class="text-muted">– 3 days ago</span> -->
-					<!--                         </div> -->
-					<!--                         <p class="m-0 my-1 mb-2 text-muted">Well, the way they make shows is, they make one show ...</p> -->
-					<!--                         <div class="blog-comments__actions"> -->
-					<!--                           <div class="btn-group btn-group-sm"> -->
-					<!--                             <button type="button" class="btn btn-white"> -->
-					<!--                               <span class="text-success"> -->
-					<!--                                 <i class="material-icons">check</i> -->
-					<!--                               </span> Approve </button> -->
-					<!--                             <button type="button" class="btn btn-white"> -->
-					<!--                               <span class="text-danger"> -->
-					<!--                                 <i class="material-icons">clear</i> -->
-					<!--                               </span> Reject </button> -->
-					<!--                             <button type="button" class="btn btn-white"> -->
-					<!--                               <span class="text-light"> -->
-					<!--                                 <i class="material-icons">more_vert</i> -->
-					<!--                               </span> Edit </button> -->
-					<!--                           </div> -->
-					<!--                         </div> -->
-					<!--                       </div> -->
-					<!--                     </div> -->
-					<!--                     <div class="blog-comments__item d-flex p-3"> -->
-					<!--                       <div class="blog-comments__avatar mr-3"> -->
-					<!--                         <img src="images/avatars/2.jpg" alt="User avatar" /> </div> -->
-					<!--                       <div class="blog-comments__content"> -->
-					<!--                         <div class="blog-comments__meta text-muted"> -->
-					<!--                           <a class="text-secondary" href="#">James Johnson</a> on -->
-					<!--                           <a class="text-secondary" href="#">Hello World!</a> -->
-					<!--                           <span class="text-muted">– 4 days ago</span> -->
-					<!--                         </div> -->
-					<!--                         <p class="m-0 my-1 mb-2 text-muted">After the avalanche, it took us a week to climb out. Now...</p> -->
-					<!--                         <div class="blog-comments__actions"> -->
-					<!--                           <div class="btn-group btn-group-sm"> -->
-					<!--                             <button type="button" class="btn btn-white"> -->
-					<!--                               <span class="text-success"> -->
-					<!--                                 <i class="material-icons">check</i> -->
-					<!--                               </span> Approve </button> -->
-					<!--                             <button type="button" class="btn btn-white"> -->
-					<!--                               <span class="text-danger"> -->
-					<!--                                 <i class="material-icons">clear</i> -->
-					<!--                               </span> Reject </button> -->
-					<!--                             <button type="button" class="btn btn-white"> -->
-					<!--                               <span class="text-light"> -->
-					<!--                                 <i class="material-icons">more_vert</i> -->
-					<!--                               </span> Edit </button> -->
-					<!--                           </div> -->
-					<!--                         </div> -->
-					<!--                       </div> -->
-					<!--                     </div> -->
-					<!--                     <div class="blog-comments__item d-flex p-3"> -->
-					<!--                       <div class="blog-comments__avatar mr-3"> -->
-					<!--                         <img src="images/avatars/3.jpg" alt="User avatar" /> </div> -->
-					<!--                       <div class="blog-comments__content"> -->
-					<!--                         <div class="blog-comments__meta text-muted"> -->
-					<!--                           <a class="text-secondary" href="#">James Johnson</a> on -->
-					<!--                           <a class="text-secondary" href="#">Hello World!</a> -->
-					<!--                           <span class="text-muted">– 5 days ago</span> -->
-					<!--                         </div> -->
-					<!--                         <p class="m-0 my-1 mb-2 text-muted">My money's in that office, right? If she start giving me...</p> -->
-					<!--                         <div class="blog-comments__actions"> -->
-					<!--                           <div class="btn-group btn-group-sm"> -->
-					<!--                             <button type="button" class="btn btn-white"> -->
-					<!--                               <span class="text-success"> -->
-					<!--                                 <i class="material-icons">check</i> -->
-					<!--                               </span> Approve </button> -->
-					<!--                             <button type="button" class="btn btn-white"> -->
-					<!--                               <span class="text-danger"> -->
-					<!--                                 <i class="material-icons">clear</i> -->
-					<!--                               </span> Reject </button> -->
-					<!--                             <button type="button" class="btn btn-white"> -->
-					<!--                               <span class="text-light"> -->
-					<!--                                 <i class="material-icons">more_vert</i> -->
-					<!--                               </span> Edit </button> -->
-					<!--                           </div> -->
-					<!--                         </div> -->
-					<!--                       </div> -->
-					<!--                     </div> -->
-					<!--                   </div> -->
-					<!--                   <div class="card-footer border-top"> -->
-					<!--                     <div class="row"> -->
-					<!--                       <div class="col text-center view-report"> -->
-					<!--                         <button type="submit" class="btn btn-white">View All Comments</button> -->
-					<!--                       </div> -->
-					<!--                     </div> -->
-					<!--                   </div> -->
-					<!--                 </div> -->
-					<!--               </div> -->
-					<!-- End Discussions Component -->
-					<!-- Top Referrals Component -->
 					<div class="col-lg-12 col-md-12 col-sm-12 mb-4">
 						<div class="table100 ver1 m-b-110">
 							<table data-vertable="ver1" id="companiesTable">
@@ -557,6 +417,7 @@
 										<th class="column100 column3" data-column="column3">Repositories</th>
 										<th class="column100 column4" data-column="column4">Average Commit</th>
 										<th class="column100 column5" data-column="column5">Repositories Size</th>
+
 									</tr>
 								</thead>
 <!-- 								<tbody> -->
