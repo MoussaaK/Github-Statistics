@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.json.JSONArray;
@@ -186,8 +187,10 @@ public class LinkRepository {
 				.getInt("issueCount");
 	}
 
+	Predicate<Language> appearMoreThanFiveTimes = (l) -> l.getLanguageFrequency() >= 5;
 	public List<Language> getSomeLanguages(){
-		getSomeRepositories();
+		if(repositories.isEmpty())
+			getSomeRepositories();
 		List<String> strings = new ArrayList<>();
 		repositories.forEach(repo -> strings.add(repo.getPrimaryLanguage()));
 
@@ -198,7 +201,11 @@ public class LinkRepository {
 			languages.add(new Language(entry.getKey(), entry.getValue()));
 		}
 		
-		return languages;
+		repositories.clear();
+		return languages.stream()
+				.filter(appearMoreThanFiveTimes)
+				.distinct()
+				.collect(Collectors.toList());
 	}
 
 	public void saveLink(Link link) {
