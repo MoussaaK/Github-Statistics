@@ -24,6 +24,7 @@ public class LinkRepository {
 	private final List<Company> companies;
 	private final List<Node> repositories;
 	private final List<Language> languages;
+	private final List<Language> reposPerYear;
 
 	public LinkRepository() {
 		links = new ArrayList<>();
@@ -31,6 +32,7 @@ public class LinkRepository {
 		companies = new ArrayList<>();
 		repositories = new ArrayList<>();
 		languages = new ArrayList<>();
+		reposPerYear = new ArrayList<>();
 	}
 
 	public List<Link> getAllLinks()  {
@@ -206,6 +208,30 @@ public class LinkRepository {
 				.filter(appearMoreThanFiveTimes)
 				.distinct()
 				.collect(Collectors.toList());
+	}
+	
+	
+	public List<Language> allRepoPerYear() {
+		
+		int lastYear = 2008;
+		int nextYear = 2009;
+		String queryString;
+		JSONObject responseFromGithub;
+		
+		for (int i = 0; i < 11; i++) {
+			queryString = "{ search(query: \"is:public created:" + lastYear + "-01-01.." + nextYear + "-01-01\", type: REPOSITORY, first: 100) { repositoryCount } }";
+			responseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
+		
+			int repoCount = responseFromGithub.getJSONObject("data")
+					.getJSONObject("search")
+					.getInt("repositoryCount");
+			
+			reposPerYear.add(new Language("" + lastYear, repoCount));
+			lastYear++;
+			nextYear++;
+		}
+		
+		return reposPerYear;
 	}
 
 	public void saveLink(Link link) {

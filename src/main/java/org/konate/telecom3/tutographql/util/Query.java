@@ -53,4 +53,8 @@ public class Query implements GraphQLRootResolver {
     public List<Language> someLanguages() {
     	return linkRepository.getSomeLanguages();
     }
+    
+    public List<Language> allRepoPerYear() {
+    	return linkRepository.allRepoPerYear();
+    }
 }
