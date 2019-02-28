@@ -47,6 +47,7 @@ type Query {
   allOpenIssueCount: Int
   allClosedIssueCount: Int
   someLanguages: [Language]
+  allRepoPerYear: [Language]
 }
 
 type Mutation {
