@@ -63,16 +63,12 @@ document.onreadystatechange = function(e)
 				}),
 				$.getJSON("http://localhost:8080/graphql?query={allClosedIssueCount}", {
 					format: "json"
-				}),
-				$.getJSON("http://localhost:8080/graphql?query={someLanguages{name,languageFrequency}}", {
-					format: "json"
-				})).then(function (res1, res2, res3, res4,res5 ) {
+				})).then(function (res1, res2, res3, res4) {
 
 					$("#numberOfUsers").text(res1[0].data.allUsersCount.toLocaleString('en', {useGrouping:true}));
 					$("#numberOfRepositories").text(res2[0].data.allRepositoryCount.toLocaleString('en', {useGrouping:true}));
 					$("#numberOfOpenedIssues").text(res3[0].data.allOpenIssueCount.toLocaleString('en', {useGrouping:true}));
 					$("#numberOfClosedIssues").text(res4[0].data.allClosedIssueCount.toLocaleString('en', {useGrouping:true}));
-					drawLanguagesPieChart(convertJsonIntoArray((res5[0]).data.someLanguages));
 				});
 
 		//For companies data
