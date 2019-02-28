@@ -1,80 +1,52 @@
-# Project Title
+# Github Statistics
 
-One Paragraph of project description goes here
+Exploring Github API V4 using GraphQL and making Statistics on github data.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development purposes.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+Be sure to have Maven installed
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+Clone the repository
 
 ```
-Give the example
-```
-
-And repeat
+git clone https://github.com/MoussaaK/Github-Statistics
 
 ```
-until finished
-```
 
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+And run jetty
 
 ```
-Give an example
-```
 
-### And coding style tests
+cd your-clone-directory
 
-Explain what these tests test and why
+mvn jetty:run
 
 ```
-Give an example
-```
 
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+And go to the index : <http://localhost:8080/> or <http://localhost:8080/index.html> to see the statistics
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [GaphQL](http://graphql.org/) - A query language for your API
 * [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+* [JSON](https://www.json.org/) - Used for mapping and forming http posts headers
+* [Jetty](https://www.eclipse.org/jetty/) - Jetty Server version : jetty-9.4.6.v20170531
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [git](https://git-scm.com/) for versioning. 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **KONATE Moussa** - *Initial work* - [MoussaaK](https://github.com/MoussaaK)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **SOKOBA Aboubacar** - *Initial work* - [ACSokoba](https://github.com/ACSokoba)
 
 ## License
 
@@ -82,11 +54,9 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+Hat tip to Shards Dashboard Team <https://github.com/DesignRevision/shards-dashboard>
 
-## Links
+## Quering the local graphql server
 
 <http://localhost:8080/graphql?query={someCompaniesData{companyName,numberOfMembers,numberOfRepositories,avarageCommitCount,totalRepositoriesDiskUsage}}>
 
@@ -105,3 +75,9 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 <http://localhost:8080/graphql?query={allRepositoryCount}>
 
 <http://localhost:8080/graphql?query={someLanguages{name,languageFrequency}}>
+
+<http://localhost:8080/graphql?query={allRepoPerYear{name,languageFrequency}}>
+
+## For more
+
+go to <https://www.howtographql.com/>
