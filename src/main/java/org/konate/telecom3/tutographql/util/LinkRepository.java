@@ -1,6 +1,7 @@
 package org.konate.telecom3.tutographql.util;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -206,6 +207,7 @@ public class LinkRepository {
 		repositories.clear();
 		return languages.stream()
 				.filter(appearMoreThanFiveTimes)
+				.sorted(Comparator.reverseOrder())
 				.distinct()
 				.collect(Collectors.toList());
 	}
