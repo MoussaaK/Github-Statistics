@@ -35,8 +35,31 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
-<script type="text/javascript"
-	src="https://www.gstatic.com/charts/loader.js"></script>
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses'],
+          ['2004',  1000,      400],
+          ['2005',  1170,      460],
+          ['2006',  660,       1120],
+          ['2007',  1030,      540]
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
 	
 </head>
 <body class="h-100">
@@ -370,6 +393,7 @@
 							</div>
 
 							<div class="card-body pt-0">
+<<<<<<< HEAD
 								<!-- 								<div class="row border-bottom py-2 bg-light"> -->
 								<!-- 									<div class="col-12 col-sm-6"> -->
 								<!-- 										<div id="blog-overview-date-range" -->
@@ -393,6 +417,32 @@
 								<!-- 								</div> -->
  								<canvas height="130" style="max-width: 100% !important;" class="blog-overview-users"></canvas>
 
+=======
+								<div class="row border-bottom py-2 bg-light">
+									<div class="col-12 col-sm-6">
+										<div id="blog-overview-date-range"
+											class="input-daterange input-group input-group-sm my-auto ml-auto mr-auto ml-sm-auto mr-sm-0"
+											style="max-width: 350px;">
+											<input type="text" class="input-sm form-control" name="start"
+												placeholder="Start Date" id="blog-overview-date-range-1">
+											<input type="text" class="input-sm form-control" name="end"
+												placeholder="End Date" id="blog-overview-date-range-2">
+											<span class="input-group-append"> <span
+												class="input-group-text"> <i class="material-icons"></i>
+											</span>
+											</span>
+										</div>
+									</div>
+									<div class="col-12 col-sm-6 d-flex mb-2 mb-sm-0">
+										<button type="button"
+											class="btn btn-sm btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0">View
+											Full Report &rarr;</button>
+									</div>
+								</div>
+								<div id="curve_chart" style="max-width: 100% !important; height: 130"></div>
+								<!--canvas height="130" style="max-width: 100% !important;"
+									class="blog-overview-users"></canvas-->
+>>>>>>> branch 'master' of https://github.com/MoussaaK/PFE-Telecom-3
 							</div>
 						</div>
 					</div>
