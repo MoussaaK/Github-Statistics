@@ -17,16 +17,43 @@ function drawLanguagesPieChart(array){
 	function drawChart() {
 		var data = google.visualization.arrayToDataTable(array);
 
-        var options = {
-                title: 'Languages on Github'
-              };
+		var options = {
+				title: 'Languages on Github'
+		};
 
 		var chart = new google.visualization.PieChart(document.getElementById('langagesPieChart'));
 		chart.draw(data, options);
+
 	}
 }
 
 
+
+function drawRepoPerYearChart(){
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
+
+	function drawChart() {
+		var data = google.visualization.arrayToDataTable([
+			['Year', 'Sales', 'Expenses'],
+			['2004',  1000,      400],
+			['2005',  1170,      460],
+			['2006',  660,       1120],
+			['2007',  1030,      540]
+			]);
+
+		var options = {
+				title: 'Company Performance',
+				curveType: 'function',
+				legend: { position: 'bottom' }
+		};
+
+		var chart = new google.visualization.LineChart(document.getElementById('repoPerYear'));
+
+		chart.draw(data, options);
+
+	}
+}
 
 //This do the Ajax request when the DOM is ready, not when the window's loading is done
 //It would have been too long
@@ -34,6 +61,8 @@ document.onreadystatechange = function(e)
 {
 	if (document.readyState === 'complete')
 	{
+
+
 		$.ajax({
 			contentType: "",
 			async: true,
@@ -69,6 +98,7 @@ document.onreadystatechange = function(e)
 					$("#numberOfRepositories").text(res2[0].data.allRepositoryCount.toLocaleString('en', {useGrouping:true}));
 					$("#numberOfOpenedIssues").text(res3[0].data.allOpenIssueCount.toLocaleString('en', {useGrouping:true}));
 					$("#numberOfClosedIssues").text(res4[0].data.allClosedIssueCount.toLocaleString('en', {useGrouping:true}));
+
 				});
 
 		//For companies data
