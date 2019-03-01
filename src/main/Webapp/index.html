@@ -42,15 +42,22 @@
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
+          ['Year', 'Repos'],
+          ['2008',  21575],
+          ['2009',  82743],
+          ['2010',  194030],
+          ['2011',  465147],
+          ['2012',  1064497],
+          ['2013',  2053467],
+          ['2014',  3535245],
+          ['2015',  5791175],
+          ['2016',  8861672],
+          ['2017',  12649281],
+          ['2018',  16769836]
         ]);
 
         var options = {
-          title: 'Company Performance',
+          title: 'Repos per year',
           curveType: 'function',
           legend: { position: 'bottom' }
         };
