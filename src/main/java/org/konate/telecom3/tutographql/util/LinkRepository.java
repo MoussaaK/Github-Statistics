@@ -1,5 +1,6 @@
 package org.konate.telecom3.tutographql.util;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -127,10 +128,10 @@ public class LinkRepository {
 							avarageCommitCount)
 					);
 		}
-		List<Company> companiesTmp = companies.stream()
+
+		return companies.stream()
 				.distinct()
 				.collect(Collectors.toList());
-		return companiesTmp;
 	}
 
 	public List<Node> getSomeRepositories() {
@@ -203,7 +204,7 @@ public class LinkRepository {
 		for (Entry<String, Integer> entry : frequencies.entrySet()) {
 			languages.add(new Language(entry.getKey(), entry.getValue()));
 		}
-		
+
 		repositories.clear();
 		return languages.stream()
 				.filter(appearMoreThanFiveTimes)
@@ -211,28 +212,28 @@ public class LinkRepository {
 				.distinct()
 				.collect(Collectors.toList());
 	}
-	
-	
+
 	public List<Language> allRepoPerYear() {
-		
+
 		int lastYear = 2008;
 		int nextYear = 2009;
+		int years = Year.now().getValue() - lastYear;
 		String queryString;
 		JSONObject responseFromGithub;
-		
-		for (int i = 0; i < 11; i++) {
+
+		for (int i = 0; i < years; i++) {
 			queryString = "{ search(query: \"is:public created:" + lastYear + "-01-01.." + nextYear + "-01-01\", type: REPOSITORY, first: 100) { repositoryCount } }";
 			responseFromGithub = new JSONObject(Utility.getQueryResponse(queryString).toString());
-		
+
 			int repoCount = responseFromGithub.getJSONObject("data")
 					.getJSONObject("search")
 					.getInt("repositoryCount");
-			
+
 			reposPerYear.add(new Language("" + lastYear, repoCount));
 			lastYear++;
 			nextYear++;
 		}
-		
+
 		return reposPerYear;
 	}
 
